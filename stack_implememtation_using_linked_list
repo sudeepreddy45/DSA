@@ -1,0 +1,40 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node{
+    int data;
+    struct node *next;
+};
+
+void push(struct node **top,int new_data){
+    struct node *new_node = (struct node*)malloc(sizeof(struct node));
+    new_node->data = new_data;
+    new_node->next = *top;
+    *top = new_node;
+}
+
+void print(struct node **top){
+    struct node *p = *top;
+    while(top){
+        printf("%d\n",p->data);
+        p = p->next;
+    }
+}
+
+void pop(struct node **top){
+    struct node *p = *top;
+    *top=p->next;
+    free(p);
+}
+
+int main(){
+    struct node *top = NULL;
+    push(&top,10);
+    push(&top,20);
+    push(&top,30);
+    // printf("Stack elements:\n");
+    // print(&top); //30,20,10
+    pop(&top);
+    printf("After popping:\n");
+    print(&top);//20,10
+    
+}
