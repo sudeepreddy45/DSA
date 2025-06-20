@@ -1,0 +1,37 @@
+#include<stdio.h>
+#define n 2
+int q[n];
+int f = 0;
+int r = -1;
+void enqueue(int data){
+    if(r == n -1){
+        printf("queue is full");
+    }
+    else{
+        r++;
+        q[r] = data;
+    }
+}
+void dequeue(){
+    if(f>r){
+        printf("Queue is empty");
+    }
+    else{
+        for(int i = 0;i<r;i++){
+            q[i] = q[i+1];
+        }
+        r--;
+    }
+}
+void print(){
+    for(int i=f;i<=r;i++){
+        printf("%d->",q[i]);
+    }
+}
+int main(){
+    enqueue(1);
+    enqueue(2);
+    enqueue(3);
+    dequeue();
+    print();
+}
