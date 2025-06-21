@@ -21,11 +21,11 @@ struct node *insert(struct node *root,int val){
 }
 struct node *search(struct node *root,int key){
     if(root == NULL) return 0;
-    if(root ->data == key) return 1;
+    if(root ->data == key) return root;
     if(key<root->data) 
-        search(root->left,key);
+        return search(root->left,key);
     else
-        search(root->right,key);
+        return search(root->right,key);
 }
 int main(){
     int a[] = {20,30,50,10,15,5,25,35,55};
