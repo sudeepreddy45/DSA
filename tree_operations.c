@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<limits.h> 
 struct node{
     int data;
     struct node *left;
@@ -57,6 +58,30 @@ int identical(struct node *root,struct node *root2){
 }
 
 
+int maximum(struct node *root){
+    if(root == NULL) return INT_MIN;
+    int max = root->data;
+    int left = maximum(root->left);
+    int right = maximum(root->right);
+    if(left>max)
+        max = left;
+    if(right>max)
+        max = right;
+    return max;
+}
+int minimum(struct node *root){
+    if(root == NULL) return INT_MAX;
+    int min = root->data;
+    int left = minimum(root->left);
+    int right = minimum(root->right);
+    if(left<min)
+        min = left;
+    if(right<min)
+        min = right;
+    return min;
+}
+
+
 int main(){
     struct node *root = createnode(1);
     root->left = createnode(2);
@@ -83,6 +108,11 @@ int main(){
     printf("number of non-leaf nodes: %d\n",nonleafnodes(root));
     printf("number of full nodes: %d\n",fullnodes(root));
     printf("above trees are identical or not: ");
-    if(identical(root,root2)) printf("YES");
-    else printf("NO");
+    if(identical(root,root2)) printf("YES\n");
+    else printf("NO\n");
+    
+    int x = minimum(root);
+    int y = maximum(root);
+    printf("Minimum node of a tree: %d\n",x);
+    printf("Maximum node of a tree: %d",y);
 }
